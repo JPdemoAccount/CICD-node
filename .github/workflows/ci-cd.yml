@@ -8,6 +8,9 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    env:
+      ACTIONS_STEP_DEBUG: true  # Enable debug logging
+      
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
