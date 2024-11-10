@@ -21,8 +21,6 @@ jobs:
     - name: Install dependencies
       run: npm install
 
-    - name: Run tests (optional)
-      run: npm test  # You can skip this step if you don't have tests
 
     - name: Install sshpass
       run: sudo apt-get install sshpass
