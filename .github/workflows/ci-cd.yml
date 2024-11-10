@@ -33,7 +33,7 @@ jobs:
               PokOlMGzksRw60fYs6M5oA/field/login > env:EC2_IP
       - name: Print password
         run: |
-          echo "Password is ${{ env.EC2_IP }}"
+          echo "EC2 IP is ${{ env.EC2_IP }}"
           
       - name: Deploy to EC2
         run: |
