@@ -31,13 +31,6 @@ jobs:
           secrets: |-
               # Reference records by UID
               PokOlMGzksRw60fYs6M5oA/field/password > PASSWORD
-              PokOlMGzksRw60fYs6M5oA/field/password > env:PASSWORD
-              PokOlMGzksRw60fYs6M5oA/field/login > LOGIN
-            
-      - name: View secrets
-        run: |
-          echo "EC2 Password is ${{ env.EC2_PASSWORD }}"
-          echo "EC2 IP is ${{ env.EC2_IP }}"
 
       - name: Deploy to EC2
         run: |
