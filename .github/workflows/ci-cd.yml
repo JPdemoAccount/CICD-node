@@ -29,7 +29,8 @@ jobs:
         with:
           keeper-secret-config: ${{ secrets.KSM_CONFIG }}
           secrets: |
-              PokOlMGzksRw60fYs6M5oA/field/password > PASSWORD
+              PokOlMGzksRw60fYs6M5oA/field/password > EC2_PASSWORD
+              PokOlMGzksRw60fYs6M5oA/field/login > EC2_IP
 
       - name: Deploy to EC2
         run: |
