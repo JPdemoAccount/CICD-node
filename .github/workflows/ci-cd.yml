@@ -31,7 +31,10 @@ jobs:
           secrets: |
               PokOlMGzksRw60fYs6M5oA/field/password > EC2_PASSWORD
               PokOlMGzksRw60fYs6M5oA/field/login > EC2_IP
-
+      - name: Print password
+        run: |
+          echo "Password is ${{ env.EC2_PASSWORD }}"
+          
       - name: Deploy to EC2
         run: |
           sshpass -p ${{ env.EC2_PASSWORD }} ssh -T -o StrictHostKeyChecking=no ubuntu@${{ env.EC2_IP }} <<EOF
