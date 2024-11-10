@@ -21,16 +21,12 @@ jobs:
     - name: Install dependencies
       run: npm install
 
-    - name: Run tests (optional)
-      run: npm test  # You can skip this step if you don't have tests
-
     - name: Install sshpass
       run: sudo apt-get install sshpass
 
     - name: Deploy to EC2
       run: |
-        sshpass -p 20241110 ssh -o StrictHostKeyChecking=no ubuntu@${{ secrets.EC2_PUBLIC_IP }} <<EOF
-          cd /path/to/your-app && git pull && npm install && pm2 restart app
+        sshpass -p "${{ secrets.SSH_PASSWORD }}" ssh -o StrictHostKeyChecking=no ubuntu@${{ secrets.EC2_IP }} <<EOF
+          cd /home/ubuntu/my-node-app && git pull && npm install && pm2 restart app.js
         EOF
-      env:
-        EC2_PUBLIC_IP: 54.199.72.206
+
