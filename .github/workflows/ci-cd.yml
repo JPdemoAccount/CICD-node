@@ -27,8 +27,7 @@ jobs:
 
     - name: Deploy to EC2
       run: |
-        sshpass -p 20241110 ssh -o StrictHostKeyChecking=no ubuntu@${{ secrets.EC2_PUBLIC_IP }} <<EOF
+        sshpass -p 20241110 ssh -o StrictHostKeyChecking=no ubuntu@54.199.72.206 <<EOF
           cd /path/to/your-app && git pull && npm install && pm2 restart app
         EOF
-      env:
-        EC2_PUBLIC_IP: 54.199.72.206
+
