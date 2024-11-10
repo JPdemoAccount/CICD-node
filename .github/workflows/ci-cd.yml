@@ -30,9 +30,9 @@ jobs:
           keeper-secret-config: ${{ secrets.KSM_CONFIG }}
           secrets: |-
             # Reference records by UID
-            PokOlMGzksRw60fYs6M5oA/field/password > EC2_PASSWORD
-            PokOlMGzksRw60fYs6M5oA/field/login > EC2_IP
-
+            keeper://PokOlMGzksRw60fYs6M5oA/field/password > EC2_PASSWORD
+            keeper://PokOlMGzksRw60fYs6M5oA/field/login > EC2_IP
+            
       - name: View secrets
         run: |
           echo "EC2 Password is ${{ env.EC2_PASSWORD }}"
