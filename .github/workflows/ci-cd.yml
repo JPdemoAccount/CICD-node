@@ -8,24 +8,39 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v2
+      - name: Checkout code
+        uses: actions/checkout@v2
 
-    - name: Set up Node.js
-      uses: actions/setup-node@v2
-      with:
-        node-version: '14'
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '14'
 
-    - name: Install dependencies
-      run: npm install
+      - name: Install dependencies
+        run: npm install
 
-    - name: Install sshpass
-      run: sudo apt-get install sshpass
+      - name: Install sshpass
+        run: sudo apt-get install sshpass
 
-    - name: Deploy to EC2
-      run: |
-        sshpass -p ${{ secrets.EC2_PASSWORD }} ssh -T -o StrictHostKeyChecking=no ubuntu@${{ secrets.EC2_IP }} <<EOF
+      - name: Retrieve secrets from Keeper
+        id: ksecrets
+        uses: Keeper-Security/ksm-action@master
+        with:
+          keeper-secret-config: ${{ secrets.KSM_CONFIG }}
+          secrets: |
+            # Reference records by UID
+            PokOlMGzksRw60fYs6M5oA/field/password > EC2_PASSWORD
+            PokOlMGzksRw60fYs6M5oA/field/login > EC2_IP
+
+      - name: View secrets
+        run: |
+          echo "EC2 Password is ${{ env.EC2_PASSWORD }}"
+          echo "EC2 Login is ${{ env.EC2_LOGIN }}"
+          echo "EC2 IP is ${{ env.EC2_IP }}"
+
+      - name: Deploy to EC2
+        run: |
+          sshpass -p ${{ env.EC2_PASSWORD }} ssh -T -o StrictHostKeyChecking=no ubuntu@${{ env.EC2_IP }} <<EOF
           cd /home/ubuntu/my-node-app && git pull && npm install && pm2 restart app.js
-        EOF
+          EOF
