@@ -28,6 +28,6 @@ jobs:
     - name: Deploy to EC2
       run: |
         sshpass -p 20241110 ssh -o StrictHostKeyChecking=no ubuntu@54.199.72.206 <<EOF
-          cd /home/ubuntu/my-node-app && git pull && npm install && pm2 restart app
+          cd /home/ubuntu/my-node-app && git pull && npm install && pm2 restart app.js
         EOF
 
