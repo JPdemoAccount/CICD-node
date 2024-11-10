@@ -29,8 +29,10 @@ jobs:
         with:
           keeper-secret-config: ${{ secrets.KSM_CONFIG }}
           secrets: |-
-            # Reference records by UID
-            PokOlMGzksRw60fYs6M5oA/field/password > PASSWORD
+              # Reference records by UID
+              PokOlMGzksRw60fYs6M5oA/field/password > PASSWORD
+              PokOlMGzksRw60fYs6M5oA/field/password > env:PASSWORD
+              PokOlMGzksRw60fYs6M5oA/field/login > LOGIN
             
       - name: View secrets
         run: |
