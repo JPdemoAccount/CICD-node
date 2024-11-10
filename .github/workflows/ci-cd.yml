@@ -7,10 +7,7 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
-    env:
-      ACTIONS_STEP_DEBUG: true  # Enable debug logging
-      
+    runs-on: ubuntu-latest      
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
@@ -32,14 +29,11 @@ jobs:
         with:
           keeper-secret-config: ${{ secrets.KSM_CONFIG }}
           secrets: |
-              PokOlMGzksRw60fYs6M5oA/field/password > EC2_PASSWORD
-              PokOlMGzksRw60fYs6M5oA/field/login > env:EC2_IP
-      - name: Print password
-        run: |
-          echo "EC2 IP is ${{ env.EC2_IP }}"
+              PokOlMGzksRw60fYs6M5oA/field/password > env:PASSWORD
+              PokOlMGzksRw60fYs6M5oA/field/login > env:IP
           
       - name: Deploy to EC2
         run: |
-          sshpass -p ${{ env.EC2_PASSWORD }} ssh -T -o StrictHostKeyChecking=no ubuntu@${{ env.EC2_IP }} <<EOF
+          sshpass -p ${{ env.PASSWORD }} ssh -T -o StrictHostKeyChecking=no ubuntu@${{ env.IP }} <<EOF
           cd /home/ubuntu/my-node-app && git pull && npm install && pm2 restart app.js
           EOF
