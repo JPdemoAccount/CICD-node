@@ -28,8 +28,7 @@ jobs:
         uses: Keeper-Security/ksm-action@master
         with:
           keeper-secret-config: ${{ secrets.KSM_CONFIG }}
-          secrets: |-
-              # Reference records by UID
+          secrets: |
               PokOlMGzksRw60fYs6M5oA/field/password > PASSWORD
 
       - name: Deploy to EC2
