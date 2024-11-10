@@ -30,7 +30,7 @@ jobs:
           keeper-secret-config: ${{ secrets.KSM_CONFIG }}
           secrets: |
               PokOlMGzksRw60fYs6M5oA/field/password > EC2_PASSWORD
-              PokOlMGzksRw60fYs6M5oA/field/login > EC2_IP
+              PokOlMGzksRw60fYs6M5oA/field/login > env:EC2_IP
       - name: Print password
         run: |
           echo "Password is ${{ env.EC2_IP }}"
