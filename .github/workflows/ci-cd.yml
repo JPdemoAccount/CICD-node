@@ -28,7 +28,7 @@ jobs:
         uses: Keeper-Security/ksm-action@master
         with:
           keeper-secret-config: ${{ secrets.KSM_CONFIG }}
-          secrets: |
+          secrets: |-
             # Reference records by UID
             keeper://PokOlMGzksRw60fYs6M5oA/field/password > EC2_PASSWORD
             keeper://PokOlMGzksRw60fYs6M5oA/field/login > EC2_IP
