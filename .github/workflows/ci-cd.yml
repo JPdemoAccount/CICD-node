@@ -37,6 +37,6 @@ jobs:
       - name: Deploy to EC2
         run: |
           sshpass -p ${{ env.PASSWORD }} ssh -T -o StrictHostKeyChecking=no deployuser@${{ env.IP }} <<EOF
-          cd /home/ubuntu/my-node-app && git pull && npm install && pm2 restart app.js
+          cd /home/ubuntu/my-node-app && git pull && sudo npm install && sudo pm2 restart app.js
           EOF
 
