@@ -21,7 +21,7 @@ jobs:
         run: npm install
 
       - name: Install sshpass
-        run: sudo apt-get install sshpass
+        run: sudo apt-get install -y sshpass
 
       - name: Retrieve secrets from Keeper
         id: ksecrets
@@ -33,9 +33,13 @@ jobs:
               PokOlMGzksRw60fYs6M5oA/field/login > env:IP1
               gE6T_M8gIOGcVBBc2AWeBA/field/password > env:PASSWORD
               gE6T_M8gIOGcVBBc2AWeBA/field/login > env:IP
-              
+
       - name: Deploy to EC2
         run: |
-          sshpass -p ${{ env.PASSWORD }} ssh -T -o StrictHostKeyChecking=no deployuser@${{ env.IP }} <<EOF
-          cd /home/ubuntu/my-node-app && git pull && npm install && pm2 restart app.js
+          sshpass -p "${{ env.PASSWORD }}" ssh -T -o StrictHostKeyChecking=no deployuser@${{ env.IP }} << 'EOF'
+            cd /home/ubuntu/my-node-app
+            git pull
+            npm install
+            pm2 restart app.js
           EOF
+
